@@ -1,31 +1,15 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.Video;
 using Unity.InferenceEngine; // Change to Unity.Sentis if using Sentis 2.1
 
 public class InferenceMgr : MonoBehaviour
 {
     public GlobalsMgr g;
-    // public enum InputSource { Webcam, Video }
-
-    // [Header("Input Settings")]
-    // public InputSource sourceType = InputSource.Webcam;
-    // public VideoPlayer videoPlayer;
-    // public RawImage displayImage;
-
-    // [Header("YOLO Model Settings")]
-    // public ModelAsset modelAsset;
-    // [Range(0.1f, 0.95f)] public float confidenceThreshold = 0.45f;
-    // [Range(0.1f, 0.95f)] public float iouThreshold = 0.45f;
-    // [Range(4f, 64f)] public float mosaicBlockSize = 24f;
 
     private const int ModelSize = 640;
     private const int MaxFaces = 20;
 
     private Worker _worker;
-    // private WebCamTexture _webcamTexture;
-    // private RenderTexture _videoRT;
     private Material _mosaicMaterial;
     private readonly Vector4[] _shaderBoxes = new Vector4[MaxFaces];
     // Texture2D tex;
@@ -33,47 +17,14 @@ public class InferenceMgr : MonoBehaviour
     void Start()
     {
         _mosaicMaterial = g.matDisplay;
-        // tex = TextureUtility.ResizeTexture(g.currentFrameTexture, 640, 640);
-
-        // // 1. Setup Material
-        // _mosaicMaterial = new Material(Shader.Find("Custom/FaceMosaic"));
-
-        // if (_mosaicMaterial == null) Debug.Log("<color=red>mosaic material\n</color>");
-        // displayImage.material = _mosaicMaterial;
-
-    
-        // amre
-        // g.matDisplay = _mosaicMaterial;
-        // g.matDisplay.mainTexture = g.currentFrameTexture;
-
-
-
-        // 2. Load YOLO Model onto GPU
         Model model = ModelLoader.Load(g.modelAsset);
         _worker = new Worker(model, BackendType.GPUCompute);
-
-        // 3. Initialize Video or Webcam
-        // if (sourceType == InputSource.Webcam)
-        // {
-        //     _webcamTexture = new WebCamTexture(1280, 720, 30);
-        //     _webcamTexture.Play();
-        //     displayImage.texture = _webcamTexture;
-        // }
-        // else if (sourceType == InputSource.Video && videoPlayer != null)
-        // {
-        //     _videoRT = new RenderTexture(1280, 720, 0);
-        //     videoPlayer.renderMode = VideoRenderMode.RenderTexture;
-        //     videoPlayer.targetTexture = _videoRT;
-        //     videoPlayer.Play();
-        //     displayImage.texture = _videoRT;
-        // }
     }
 
     public void Infer()
     {
         Texture activeTex = TextureUtility.ResizeTexture(g.currentFrameTexture, 640, 640);
 
-        // Texture activeTex = g.currentFrameTexture;
         if (activeTex == null || activeTex.width <= 16) return;
 
         // Convert Texture to [1, 3, 640, 640] Tensor
@@ -170,8 +121,6 @@ public class InferenceMgr : MonoBehaviour
     void OnDestroy()
     {
         _worker?.Dispose();
-        // if (_webcamTexture != null) _webcamTexture.Stop();
-        // if (_videoRT != null) _videoRT.Release();
     }
 }
 public struct FaceBox
