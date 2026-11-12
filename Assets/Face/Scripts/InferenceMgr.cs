@@ -24,7 +24,7 @@ public class InferenceMgr : MonoBehaviour
     public void Infer()
     {
         if (g.currentFrameTexture == null) return;
-        Texture activeTex = TextureUtility.ResizeTexture(g.currentFrameTexture, 640, 640);
+        Texture activeTex = g.toolsMgr.ResizeTexture(g.currentFrameTexture, 640, 640);
 
         if (activeTex == null || activeTex.width <= 16) return;
 

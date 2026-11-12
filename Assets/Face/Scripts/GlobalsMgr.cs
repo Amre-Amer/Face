@@ -21,6 +21,7 @@ public class GlobalsMgr : MonoBehaviour
     [Range(0.1f, 0.95f)] public float confidenceThreshold = 0.45f;
     [Range(0.1f, 0.95f)] public float iouThreshold = 0.45f;
     [Range(4f, 64f)] public float mosaicBlockSize = 24f;
+    public float mosaicBlockSizeFraction = .0375f;
     
     [Header("Video")]
     public VideoPlayer videoPlayer;

@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class TestMgr : MonoBehaviour
 {
+    public GlobalsMgr g;
     public GameObject quad;
     private Material _mosaicMaterial;
     private const int MaxFaces = 20;
@@ -18,7 +19,7 @@ public class TestMgr : MonoBehaviour
 
     void Start()
     {
-        tex = TextureUtility.ResizeTexture(texOrig, 640, 640);
+        tex = g.toolsMgr.ResizeTexture(texOrig, 640, 640);
         quad.GetComponent<Renderer>().material.mainTexture = tex;
         _mosaicMaterial = quad.GetComponent<Renderer>().material;
         InvokeRepeating(nameof(Test), 1, .1f);

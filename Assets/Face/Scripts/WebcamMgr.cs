@@ -8,6 +8,7 @@ public class WebcamMgr : MonoBehaviour
     {
         g.webCamTexture = new WebCamTexture();
         g.webCamTexture.Play();
+        g.toolsMgr.SetMosaicBlockSize(g.webCamTexture.width, g.webCamTexture.height);
     }
 
     void Update()
@@ -23,14 +24,7 @@ public class WebcamMgr : MonoBehaviour
         {
             return;
         }
-
-        // Create the Texture2D once, or recreate if resolution changes
-        // if (snapTexture == null || snapTexture.width != webCamTexture.width || snapTexture.height != webCamTexture.height)
-        // {
         Texture2D tex = new Texture2D(g.webCamTexture.width, g.webCamTexture.height, TextureFormat.RGBA32, false);
-        // }
-
-        // Copy pixel data and upload to the GPU
         tex.SetPixels32(g.webCamTexture.GetPixels32());
         tex.Apply();
         g.currentFrameTexture = tex;

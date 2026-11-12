@@ -521,6 +521,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 644cca57272da874c8ddec9c7d20580f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TestMgr
+  g: {fileID: 890034066}
   quad: {fileID: 1220163491}
   texOrig: {fileID: 2800000, guid: 7c2ebcc627b356d4d8571baaee545b3f, type: 3}
 --- !u!4 &811918375
@@ -580,6 +581,7 @@ MonoBehaviour:
   confidenceThreshold: 0.45
   iouThreshold: 0.45
   mosaicBlockSize: 24
+  mosaicBlockSizeFraction: 0.025
   videoPlayer: {fileID: 890034068}
   videoClip: {fileID: 32900000, guid: ed684b9493a7c3440b8cde87225092d8, type: 3}
   matDisplay: {fileID: 2100000, guid: fda5bcc5ed24b0241b51fb4aa3e5e808, type: 2}

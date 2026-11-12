@@ -6,6 +6,7 @@ public class VideoMgr : MonoBehaviour
     public GlobalsMgr g;
     void Awake()
     {
+        g.toolsMgr.SetMosaicBlockSize((int)g.videoClip.width, (int)g.videoClip.height);
         g.videoPlayer.isLooping = true;
         g.videoPlayer.playOnAwake = false;
         g.videoPlayer.clip = g.videoClip;
