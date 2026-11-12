@@ -20,6 +20,7 @@ public class FaceMgr : MonoBehaviour
     void Update()
     {
         g.matDisplay.mainTexture = g.currentFrameTexture;
+        g.inferenceMgr.Infer();
         g.cntFps++;
     }
 
